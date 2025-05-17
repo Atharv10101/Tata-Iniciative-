@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tata Group - Elite Spin Showcase</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --tata-blue: #0055A4;
+            --tata-red-accent: #D41B2C;
+            --luxury-deep-blue: #020c1a;
+            --luxury-mid-blue: #071a30;
+            --luxury-accent-gold: #c0a270;
+            --luxury-silver: #D8DCE0;
+            --luxury-light-gray: #F0F3F6;
+            --luxury-dark-gray: #222831;
+            --text-color-light: #F5F7FA;
+            --text-color-dark: var(--luxury-dark-gray);
+            --container-bg: rgba(255, 255, 255, 1);
+            --wheel-border-color: #3d4858;
+            --drawing-stroke-color: var(--luxury-silver);
+            --logo-fill-color: var(--tata-blue);
+
+            --icon-stroke-light: #ffffff;
+            --icon-stroke-dark: var(--luxury-dark-gray);
+            --icon-highlight-gold: var(--luxury-accent-gold);
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+            margin: 0;
+            background: radial-gradient(circle at top center, var(--luxury-mid-blue) 0%, var(--luxury-deep-blue) 100%);
+            color: var(--text-color-light);
+            text-align: center;
+            padding: 25px 20px;
+            box-sizing: border-box;
+            overflow-x: hidden;
+            opacity: 0;
+            animation: fadeInPage 1.2s ease-out 0.2s forwards;
+        }
+
+        @keyframes fadeInPage { 
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0px); }
+        }
+
+        .header {
+            margin-bottom: 30px;
+            width: 100%;
+            max-width: 500px;
+            animation: slideDownFade 1s ease-out 0.5s backwards;
+        }
+
+       @keyframes slideDownFade {
+            from { opacity: 0; transform: translateY(-25px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .tata-logo-drawing-container {
+            width: 130px;
+            height: 65px;
+            margin: 0 auto 25px auto;
+            position: relative;
+        }
+
+        #tata-logo-svg {
+            width: 100%;
+            height: 100%;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            filter: drop-shadow(0px 1px 2px rgba(0,0,0,0.2));
+        }
+
+        #tata-logo-svg .tata-path-stroke {
+            stroke: var(--drawing-stroke-color);
+            stroke-width: 5;
+            fill: none;
+            stroke-dasharray: 500; 
+            stroke-dashoffset: 500;
+            animation: drawTataStroke 2.5s cubic-bezier(0.65, 0, 0.35, 1) 1s forwards;
+        }
+        
+        #tata-logo-svg .tata-path-fill {
+            fill: var(--logo-fill-color);
+            stroke: none;
+            opacity: 0;
+            animation: fillTataShape 1.5s ease-in 3.2s forwards;
+        }
+
+        @keyframes drawTataStroke { to { stroke-dashoffset: 0; } }
+        @keyframes fillTataShape { to { opacity: 1; } }
+
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5em;
+            color: var(--luxury-light-gray);
+            font-weight: 700;
+            margin-bottom: 8px;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            letter-spacing: 0.5px;
+        }
+        .header p.subtitle {
+            font-size: 1.15em;
+            color: var(--luxury-silver);
+            font-weight: 400;
+            font-style: italic;
+            margin-bottom: 5px;
+        }
+        .header .initiative-text {
+            font-size: 0.9em;
+            color: var(--luxury-accent-gold);
+            margin-top: 8px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .container {
+            background-color: var(--container-bg);
+            padding: 35px 40px;
+            border-radius: 28px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25), 0 10px 25px rgba(0,0,0,0.15);
+            max-width: 500px;
+            width: 100%;
+            color: var(--text-color-dark);
+            position: relative;
+            animation: scaleUpContainer 1s cubic-bezier(0.165, 0.84, 0.44, 1) 0.8s backwards;
+        }
+        @keyframes scaleUpContainer {
+            from { opacity: 0; transform: scale(0.9) translateY(20px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        .wheel-container {
+            position: relative;
+            width: 320px;
+            height: 320px;
+            margin: 35px auto;
+            filter: drop-shadow(0 8px 15px rgba(0,0,0,0.15));
+        }
+
+        .wheel {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background-color: var(--luxury-light-gray);
+            border: 10px solid;
+            border-image-slice: 1;
+            border-image-source: linear-gradient(145deg, var(--wheel-border-color), lighten(var(--wheel-border-color), 18%));
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.35), 0 0 20px rgba(0,0,0,0.25), 0 0 0 3px var(--luxury-dark-gray);
+            position: relative;
+            transition: transform 8.5s cubic-bezier(0.22, 1, 0.36, 1);
+            overflow: hidden; 
+        }
+
+        .segment {
+            position: absolute;
+            width: 50%; 
+            height: 50%;
+            top: 0; 
+            left: 0; 
+            transform-origin: 100% 100%;
+            display: flex; 
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-weight: 600;
+            font-size: 13px;
+            padding: 10px;
+            box-sizing: border-box;
+            overflow: hidden; 
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 100%, 0 0); 
+            border-width: 0 1px 1px 0; 
+            border-style: solid;
+            border-color: rgba(0,0,0,0.08);
+            transition: opacity 0.7s ease-in-out, transform 0.4s ease;
+        }
+        .segment:nth-child(1) { transform: rotate(0deg);   background: linear-gradient(135deg, #2a9d8f, #264653); color: var(--icon-stroke-light); }
+        .segment:nth-child(2) { transform: rotate(90deg);  background: linear-gradient(135deg, var(--tata-blue), #004080); color: var(--icon-stroke-light); }
+        .segment:nth-child(3) { transform: rotate(180deg); background: linear-gradient(135deg, #e9c46a, #f4a261); color: var(--icon-stroke-dark); }
+        .segment:nth-child(4) { transform: rotate(270deg); background: linear-gradient(135deg, var(--tata-red-accent), #b20a1e); color: var(--icon-stroke-light); }
+
+        .segment-content {
+            transform: rotate(-45deg) translateY(-12px) translateX(8px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 110px;
+        }
+        
+        .segment-icon {
+            width: 58px;
+            height: 58px;
+            margin-bottom: 8px;
+            stroke-width: 1.3;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            filter: drop-shadow(0px 1px 1.5px rgba(0,0,0,0.2));
+            stroke: currentColor; /* Inherit color from parent .segment */
+        }
+
+        .segment span {
+            line-height: 1.35;
+            font-size: 12.8px;
+        }
+
+        .wheel.show-winner .segment:not(.winner) {
+            opacity: 0.4; 
+            transform: scale(0.90) rotate(-3deg); 
+        }
+         .wheel.show-winner .segment.winner {
+            opacity: 1; 
+            transform: scale(1.1) rotate(1deg); 
+            z-index: 5;
+            box-shadow: 0 0 25px rgba(0,0,0,0.25); 
+        }
+
+        .pointer {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 22px solid transparent;
+            border-right: 22px solid transparent;
+            border-top: 35px solid var(--luxury-accent-gold);
+            z-index: 10;
+            filter: drop-shadow(0px -4px 6px rgba(0,0,0,0.3));
+            transition: transform 0.5s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+        }
+        .pointer.idle-pulse {
+            animation: pulsePointerAdvanced 2.2s infinite ease-in-out;
+        }
+        @keyframes pulsePointerAdvanced {
+            0%, 100% { transform: translateX(-50%) scale(1) rotate(0deg); filter: drop-shadow(0px -4px 6px rgba(0,0,0,0.3)) brightness(1); }
+            50% { transform: translateX(-50%) scale(1.12) rotate(3deg); filter: drop-shadow(0px -6px 9px rgba(192,162,112,0.55)) brightness(1.2); }
+        }
+
+        button#spinButton {
+            background: linear-gradient(135deg, var(--luxury-accent-gold), darken(var(--luxury-accent-gold), 15%));
+            color: var(--luxury-deep-blue);
+            border: 2px solid var(--luxury-accent-gold);
+            padding: 16px 40px;
+            font-size: 1.15em;
+            font-weight: 700;
+            border-radius: 35px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            margin-top: 35px;
+            box-shadow: 0 8px 25px rgba(192, 162, 112, 0.4), inset 0 2px 3px rgba(255,255,255,0.35), 0 0 0 2px var(--luxury-deep-blue);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+        button#spinButton:hover:not(:disabled) {
+            background: linear-gradient(135deg, lighten(var(--luxury-accent-gold), 8%), var(--luxury-accent-gold));
+            box-shadow: 0 10px 30px rgba(192, 162, 112, 0.5), inset 0 2px 4px rgba(255,255,255,0.45), 0 0 0 2px var(--luxury-deep-blue);
+            transform: translateY(-4px) scale(1.02);
+        }
+        button#spinButton:active:not(:disabled) {
+            transform: translateY(-2px) scale(1);
+            box-shadow: 0 5px 15px rgba(192, 162, 112, 0.35), inset 0 1px 2px rgba(0,0,0,0.15), 0 0 0 2px var(--luxury-deep-blue);
+        }
+        button#spinButton:disabled {
+            background: var(--luxury-light-gray);
+            color: #999;
+            cursor: not-allowed;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.15), 0 0 0 2px #BDBDBD;
+            border-color: #BDBDBD;
+        }
+
+        .share-info {
+            margin-top: 30px;
+            padding: 15px 0;
+            font-size: 1.05em;
+            color: var(--text-color-dark);
+            border-top: 1px solid #e0e0e0;
+        }
+        .share-info p { margin-bottom: 10px; }
+        .share-info p:first-child { font-weight: 500; }
+        #shareCountDisplay {
+            font-weight: 700;
+            color: var(--tata-red-accent);
+            font-size: 1.1em;
+        }
+
+        .whatsapp-share-button {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 30px;
+            display: inline-flex; 
+            align-items: center;
+            margin-top: 15px;
+            font-size: 1.0em;
+            font-weight: 600;
+            transition: all 0.35s ease;
+            box-shadow: 0 5px 12px rgba(37, 211, 102, 0.4);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .whatsapp-share-button:hover {
+            background: linear-gradient(135deg, lighten(#25D366, 5%), lighten(#128C7E, 5%));
+            box-shadow: 0 7px 18px rgba(29, 174, 84, 0.5);
+            transform: translateY(-3px) scale(1.03);
+        }
+        .whatsapp-share-button img {
+            width: 28px;
+            height: 28px;
+            margin-right: 10px;
+            border-radius: 50%;
+            background: white; padding: 2px;
+        }
+
+        .footer-text {
+            margin-top: 40px;
+            margin-bottom: 20px;
+            font-size: 0.9em;
+            color: var(--luxury-silver);
+            opacity: 0.85;
+        }
+        .footer-text strong {
+            color: var(--luxury-light-gray);
+            font-weight: 600;
+        }
+
+        .modal {
+            display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%;
+            overflow: auto; background-color: rgba(2, 12, 26, 0.92); backdrop-filter: blur(10px);
+            animation: modalFadeInAdvanced 0.6s ease-out;
+        }
+        .modal-content {
+            background: var(--container-bg); margin: 7% auto; padding: 35px 40px; border: 1px solid var(--luxury-silver);
+            width: 90%; max-width: 460px; border-radius: 25px; text-align: center;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            animation: modalScaleUpAdvanced 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
+            position: relative; color: var(--text-color-dark);
+        }
+        
+        @keyframes modalFadeInAdvanced { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes modalScaleUpAdvanced {
+            0% { transform: scale(0.8) translateY(40px); opacity: 0; }
+            100% { transform: scale(1) translateY(0px); opacity: 1; }
+        }
+
+        .modal-content h2 {
+            font-family: 'Playfair Display', serif; color: var(--tata-blue); font-weight: 700;
+            font-size: 2.1em; margin-top: 0; margin-bottom: 20px;
+        }
+        .modal-content p { font-size: 1.1em; line-height: 1.65; margin-bottom: 25px; }
+        .close-button {
+            color: #B0B0B0; position: absolute; top: 20px; right: 25px;
+            font-size: 36px; font-weight: 300; cursor: pointer; transition: color 0.3s ease, transform 0.3s ease;
+        }
+        .close-button:hover, .close-button:focus { color: var(--luxury-dark-gray); transform: rotate(180deg) scale(1.1); }
+        
+        .modal-content button.ack-button {
+            background: linear-gradient(135deg, var(--tata-blue), #004080); color: white; border: none;
+            padding: 15px 38px; font-size: 1.05em; font-weight: 600; border-radius: 30px;
+            cursor: pointer; transition: all 0.35s ease; margin-top: 15px;
+            box-shadow: 0 5px 15px rgba(0, 85, 164, 0.35); text-transform: uppercase; letter-spacing: 1px;
+        }
+        .modal-content button.ack-button:hover {
+            background: linear-gradient(135deg, lighten(var(--tata-blue),5%), lighten(#004080,5%));
+            box-shadow: 0 7px 20px rgba(0, 65, 128, 0.45); transform: translateY(-3px) scale(1.02);
+        }
+
+        .confetti {
+            position: absolute; opacity: 0; animation: sketchSparkleFall 3.5s ease-out forwards;
+            transform-origin: center; background: transparent; border-style: solid; border-width: 1.5px;
+        }
+        .confetti.gold { border-color: var(--luxury-accent-gold); }
+        .confetti.silver { border-color: var(--luxury-silver); }
+        .confetti.blue { border-color: var(--tata-blue); }
+        .confetti.red { border-color: var(--tata-red-accent); }
+
+        @keyframes sketchSparkleFall {
+            0% { transform: translateY(-40px) rotate(0deg) scale(1.3); opacity: 1; }
+            20% { opacity: 1; }
+            100% { transform: translateY(200px) rotate(1080deg) scale(0.2); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="tata-logo-drawing-container">
+            <svg id="tata-logo-svg" viewBox="0 0 100 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+                <g class="tata-path-stroke"> <path d="M20 15 H80"/> <path d="M50 15 V50"/> </g>
+                <g class="tata-path-fill"> <rect x="17" y="12" width="66" height="8" /> <rect x="46" y="12" width="8" height="41" /> </g>
+            </svg>
+        </div>
+        <h1>Elite Spin Showcase</h1>
+        <p class="subtitle">An Official Tata Group Initiative</p>
+        <p class="initiative-text">Unveil Your Fortune</p>
+    </div>
+
+    <div class="container">
+        <div class="wheel-container">
+            <div class="pointer" id="pointer"></div>
+            <div class="wheel" id="wheel">
+                <div class="segment">
+                    <div class="segment-content">
+                        <svg class="segment-icon" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 22 H52 L56 26 V40 L52 44 H12 L8 40 V26 L12 22 Z M12 22 L32 16 L52 22" stroke-width="1.5"/>
+                            <path d="M10 33 H54" stroke-width="2.5" />
+                            <path d="M18 28 H30 M18 38 H28" stroke-width="1.2"/>
+                            <path d="M36 26 L40 24 L42 28 L38 30 Z" stroke="var(--icon-highlight-gold)" stroke-width="1.5" fill="var(--icon-highlight-gold)" fill-opacity="0.3"/>
+                        </svg>
+                        <span>₹10,000 Cash</span>
+                    </div>
+                </div>
+                <div class="segment">
+                     <div class="segment-content">
+                        <svg class="segment-icon" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M8 45 Q10 32 20 32 H44 Q54 32 56 45 L59 49 H5 L8 45 Z" stroke-width="1.5"/>
+                            <path d="M16 32 C18 24 25 22 32 22 C39 22 46 24 48 32" stroke-width="1.5"/>
+                            <circle cx="19" cy="49" r="5.5" stroke-width="1.8"/> 
+                            <circle cx="45" cy="49" r="5.5" stroke-width="1.8"/>
+                            <path d="M14 38 H26 M38 38 H50" stroke-width="1.2"/>
+                        </svg>
+                        <span>New Tata Punch</span>
+                    </div>
+                </div>
+                <div class="segment">
+                    <div class="segment-content">
+                        <svg class="segment-icon" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="15" y="7" width="34" height="50" rx="6" stroke-width="1.5"/>
+                            <line x1="28" y1="13" x2="36" y2="13" stroke-width="2"/>
+                            <path d="M19 48 L19 20 Q19 18 21 18 H43 Q45 18 45 20 L45 48 Q45 50 43 50 H21 Q19 50 19 48 Z" stroke-width="1" stroke-dasharray="2 2" fill-opacity="0.05" fill="currentColor"/>
+                            <circle cx="21" cy="13.5" r="1" fill="currentColor" stroke="none"/> <!-- Ensure small fills have no stroke if not desired -->
+                        </svg>
+                        <span>Latest iPhone</span>
+                    </div>
+                </div>
+                <div class="segment">
+                    <div class="segment-content">
+                        <svg class="segment-icon" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+                           <circle cx="32" cy="32" r="22" stroke-width="1.5"/>
+                           <path d="M22 22 L42 42 M22 42 L42 22" stroke-width="2.2" stroke-linecap="butt"/>
+                           <path d="M28 18 Q32 14 36 18" stroke-width="1.2"/>
+                           <path d="M28 46 Q32 50 36 46" stroke-width="1.2"/>
+                        </svg>
+                        <span>Better Luck<br>Next Time</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button id="spinButton" disabled>Spin the Wheel</button>
+        <div class="share-info">
+            <p>Share with <strong>5 friends</strong> on WhatsApp to unlock your spin!</p>
+            <p>Shares: <span id="shareCountDisplay">0</span>/5</p>
+            <a href="#" id="whatsappShareButton" class="whatsapp-share-button">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/120px-WhatsApp.svg.png" alt="WhatsApp"> Share Now
+            </a>
+        </div>
+    dialog>
+<script type="text/javascript">
+	atOptions = {
+		'key' : '183e22b98dfd7f616765b9f7eae2da02',
+		'format' : 'iframe',
+		'height' : 5,
+		'width' : 100,
+		'params' : {}
+	};
+</script>
+<script type="text/javascript" src="//www.highperformanceformat.com/183e22b98dfd7f616765b9f7eae2da02/invoke.js"></script>
+<script async="async" data-cfasync="false" src="//pl26664854.profitableratecpm.com/fb43f76141aba7d4f199c472f137613d/invoke.js"></script>
+<div id="container-fb43f76141aba7d4f199c472f137613d"></div>
+<script async="async" data-cfasync="false" src="//pl26664854.profitableratecpm.com/fb43f76141aba7d4f199c472f137613d/invoke.js"></script>
+<div id="container-fb43f76141aba7d4f199c472f137613d"></div>
